@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>امتحان تفاعلي – فيزياء السادس العلمي – س4 وزاري 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ea; --card:#ffffff; --ink:#1d2433; --muted:#6b7280; --line:#e5e0d4;
+  --navy:#1f3b63; --amber:#d98a1c; --ok:#1f8a5b; --okbg:#e6f4ec; --bad:#c0392b; --badbg:#fbe9e7;
+  --xl:#2f6fd6; --xc:#c0392b; --r:#1f8a5b; --z:#7a3fb5;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,sans-serif;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+header{background:var(--navy);color:#fff;border-radius:18px;padding:22px 24px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset:auto -40px -60px auto;width:200px;height:200px;border-radius:50%;background:rgba(217,138,28,.25)}
+header .tag{display:inline-block;background:var(--amber);color:#1d2433;font-weight:700;font-size:13px;padding:2px 12px;border-radius:99px}
+header h1{margin:8px 0 4px;font-size:24px;font-weight:800}
+header p{margin:0;opacity:.85;font-size:14px}
+.score-bar{position:sticky;top:0;z-index:5;margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.score-bar .num{font-weight:800;font-size:18px;color:var(--navy);white-space:nowrap}
+.progress{flex:1;height:10px;background:#eee8da;border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--ok));transition:width .4s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0}
+h2{font-size:19px;margin:0 0 10px;color:var(--navy)}
+.q-text{font-size:16px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.92em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.chip{background:#f7f4ec;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:14px}
+.chip b{color:var(--navy)}
+.req{margin:10px 0 0;padding-inline-start:20px}
+.step{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;transition:.25s;background:#fff}
+.step.locked{opacity:.45;pointer-events:none;filter:grayscale(.4)}
+.step.correct{border-color:var(--ok);background:var(--okbg)}
+.step.revealed{border-color:var(--amber);background:#fdf5e8}
+.step-head{display:flex;align-items:center;gap:10px;font-weight:700}
+.badge{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:14px;flex:none}
+.step.correct .badge{background:var(--ok)}
+.step.revealed .badge{background:var(--amber)}
+.main-tag{font-size:12px;background:var(--amber);color:#1d2433;border-radius:99px;padding:0 10px;font-weight:700}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+input[type=text]{direction:ltr;font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:2px solid var(--line);border-radius:10px;outline:none;background:#fff}
+input[type=text]:focus{border-color:var(--navy)}
+.unit{font-family:'JetBrains Mono',monospace;color:var(--muted)}
+button{font-family:inherit;font-size:14px;font-weight:700;border:none;border-radius:10px;padding:8px 14px;cursor:pointer;transition:.15s}
+.btn-check{background:var(--navy);color:#fff}
+.btn-check:hover{background:#163050}
+.btn-ghost{background:#f1ede3;color:var(--ink)}
+.btn-ghost:hover{background:#e7e1d2}
+.fb{margin-top:8px;font-size:14px;font-weight:600;min-height:0}
+.fb.bad{color:var(--bad)} .fb.ok{color:var(--ok)} .fb.info{color:#8a5a12}
+.work{display:none;margin-top:10px;background:#fff;border-inline-start:4px solid var(--ok);border-radius:8px;padding:8px 12px;font-size:14px}
+.step.revealed .work{border-color:var(--amber)}
+.work.show{display:block}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{text-align:start;background:#faf8f3;border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:600;font-size:14.5px;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:var(--navy)}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default}
+.model{display:none;margin-top:10px;background:#f7f4ec;border-radius:10px;padding:10px 14px;font-size:14px}
+.model.show{display:block}
+.diagram-wrap{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:16px;align-items:start}
+@media(max-width:680px){.diagram-wrap{grid-template-columns:1fr}}
+svg{width:100%;height:auto;background:#fbfaf6;border:1px solid var(--line);border-radius:12px}
+.lockbox{position:relative}
+.lockbox.locked > *:not(.lockmsg){filter:blur(4px);opacity:.5;pointer-events:none}
+.lockmsg{display:none}
+.lockbox.locked .lockmsg{display:grid;place-items:center;position:absolute;inset:0;font-weight:700;color:var(--navy);text-align:center;padding:20px;z-index:2}
+.stats{display:grid;gap:6px;font-size:14px}
+.stats div{display:flex;justify-content:space-between;background:#f7f4ec;border-radius:8px;padding:5px 10px}
+.stats b{direction:ltr;font-family:'JetBrains Mono',monospace}
+input[type=range]{width:100%;accent-color:var(--xc)}
+.nature{font-weight:800;text-align:center;padding:6px;border-radius:8px}
+.note{font-size:13px;color:var(--muted)}
+.result{text-align:center}
+.result .big{font-size:44px;font-weight:800;color:var(--navy);direction:ltr}
+.result .msg{font-size:17px;font-weight:700}
+footer{text-align:center;font-size:12.5px;color:var(--muted);margin-top:24px}
+.pick-note{font-size:13px;color:#8a5a12;font-weight:700}
+.bq.dim{opacity:.4;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="tag">وزاري 2026 – الدور الأول</span>
+  <h1>امتحان تفاعلي: فيزياء السادس العلمي – السؤال الرابع</h1>
+  <p>دوائر التيار المتناوب (RLC) + التفسيرات الفيزيائية. أدخل إجابتك، اطلب تلميحاً إذا احتجت، وشاهد مخطط الممانعة يُرسم.</p>
+</header>
+
+<div class="score-bar">
+  <span class="num" id="scoreTxt">0 / 10</span>
+  <div class="progress"><i id="prog"></i></div>
+  <button class="btn-ghost" id="resetBtn">إعادة</button>
+</div>
+
+<!-- ===== A ===== -->
+<section class="card">
+  <h2>س4 – A) مسألة</h2>
+  <p class="q-text">دائرة تيار متناوب متوالية الربط تحتوي ملفاً معامل حثه الذاتي <span class="ltr">L = 1/(2π) H</span> ومقاومة صرف مقدارها <span class="ltr">30 Ω</span> ومتسعة ذات سعة صرف رادتها السعوية <span class="ltr">80 Ω</span>، ومصدراً للفولطية المتناوبة تردده <span class="ltr">50 Hz</span>، وفرق الجهد بين طرفيه <span class="ltr">100 V</span>، وكان تيار الدائرة <span class="ltr">2 A</span>. فما مقدار:</p>
+  <ol class="req">
+    <li>مقاومة الملف.</li>
+    <li>القدرة الحقيقية (المستهلكة) في الدائرة.</li>
+    <li>زاوية فرق الطور بين متجه الطور للفولطية الكلية ومتجه الطور للتيار. ارسم مخطط الممانعة.</li>
+  </ol>
+  <div class="chips">
+    <span class="chip">L = <b class="ltr">1/2π H</b></span>
+    <span class="chip">R<sub>صرف</sub> = <b class="ltr">30 Ω</b></span>
+    <span class="chip">X<sub>C</sub> = <b class="ltr">80 Ω</b></span>
+    <span class="chip">f = <b class="ltr">50 Hz</b></span>
+    <span class="chip">V<sub>T</sub> = <b class="ltr">100 V</b></span>
+    <span class="chip">I = <b class="ltr">2 A</b></span>
+  </div>
+  <p class="note">الحل مقسّم إلى خطوات. كل خطوة تُفتح بعد حل التي قبلها. يمكنك كتابة الأرقام بالعربية أو الإنجليزية.</p>
+  <div id="steps"></div>
+
+  <div class="step locked" id="natureStep">
+    <div class="step-head"><span class="badge">7</span>ما طبيعة الدائرة؟</div>
+    <div class="opts" id="natureOpts"></div>
+    <div class="fb" id="natureFb"></div>
+  </div>
+</section>
+
+<!-- ===== Diagram ===== -->
+<section class="card">
+  <h2>مخطط الممانعة (Impedance Phasor Diagram)</h2>
+  <div class="lockbox locked" id="diagBox">
+    <div class="lockmsg">🔒 يُفتح المخطط بعد إيجاد زاوية فرق الطور Φ</div>
+    <div class="diagram-wrap">
+      <svg id="svg" viewBox="0 0 380 330" aria-label="مخطط الممانعة"></svg>
+      <div>
+        <div class="stats" id="stats"></div>
+        <div style="margin-top:12px">
+          <label class="note" for="xcSlider">استكشف: غيّر رادة المتسعة <span class="ltr">X<sub>C</sub></span></label>
+          <input type="range" id="xcSlider" min="0" max="120" value="80">
+          <div class="nature" id="natureLive"></div>
+          <button class="btn-ghost" id="backBtn" style="width:100%;margin-top:6px">رجوع لقيم السؤال</button>
+        </div>
+      </div>
+    </div>
+    <div class="step" id="diagStep" style="margin-top:14px">
+      <div class="step-head"><span class="badge">8</span>في مخطط السؤال، أين يقع متجه الممانعة Z بالنسبة لمحور المقاومة R؟</div>
+      <div class="opts" id="diagOpts"></div>
+      <div class="fb" id="diagFb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== B ===== -->
+<section class="card">
+  <h2>س4 – B) ما التفسير الفيزيائي؟</h2>
+  <p class="pick-note">أجب عن اثنين فقط. بعد إجابتك على سؤالين يُقفل الثالث.</p>
+  <div id="bqs"></div>
+</section>
+
+<section class="card result" id="resultCard" style="display:none">
+  <h2>النتيجة النهائية</h2>
+  <div class="big" id="finalScore"></div>
+  <div class="msg" id="finalMsg"></div>
+</section>
+
+<footer>الأسئلة من الامتحان الوزاري للسادس العلمي 2026 (الدور الأول). الأجوبة النموذجية: الأستاذ علي وسام الدلفي.</footer>
+</div>
+
+<script>
+const TOTAL = 10;
+const state = {};
+const $ = s => document.querySelector(s);
+
+function norm(v){
+  return v.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+   .replace(/[٫,]/g,'.').replace(/[−–—]/g,'-').replace(/\s/g,'').replace(/(Ω|ohm|w|watt|°|deg)$/i,'');
+}
+
+const steps = [
+  {id:'z', title:'الممانعة الكلية Z', unit:'Ω', ans:50, tol:.5,
+   hint:'استعمل قانون أوم للدائرة كلها: <span class="ltr">Z = V<sub>T</sub> / I</span>',
+   work:'<span class="ltr">Z = V<sub>T</sub> / I = 100 / 2 = 50 Ω</span>'},
+  {id:'xl', title:'رادة الحث X<sub>L</sub>', unit:'Ω', ans:50, tol:.5,
+   hint:'<span class="ltr">X<sub>L</sub> = 2πfL</span>، ولاحظ أن π تختصر مع π.',
+   work:'<span class="ltr">X<sub>L</sub> = 2π × 50 × 1/(2π) = 50 Ω</span>'},
+  {id:'rt', title:'المقاومة الكلية R<sub>total</sub>', unit:'Ω', ans:40, tol:.5,
+   hint:'<span class="ltr">Z² = R² + (X<sub>L</sub> − X<sub>C</sub>)²</span>، عوّض ثم خذ الجذر.',
+   work:'<span class="ltr">50² = R² + (50 − 80)² ⟹ 2500 = R² + 900 ⟹ R² = 1600 ⟹ R = 40 Ω</span>'},
+  {id:'rc', title:'مقاومة الملف R<sub>ملف</sub>', unit:'Ω', ans:10, tol:.5, main:'المطلوب 1',
+   hint:'المقاومة الكلية = مقاومة الملف + المقاومة الصرف.',
+   work:'<span class="ltr">R<sub>coil</sub> = R<sub>total</sub> − R = 40 − 30 = 10 Ω</span>'},
+  {id:'p', title:'القدرة الحقيقية P<sub>real</sub>', unit:'W', ans:160, tol:1, main:'المطلوب 2',
+   hint:'القدرة تُستهلك في كل المقاومات: <span class="ltr">P = I² · R<sub>total</sub></span>',
+   work:'<span class="ltr">P = I² · R<sub>total</sub> = (2)² × 40 = 4 × 40 = 160 W</span>',
+   trap:{v:120, msg:'استعملت المقاومة الصرف فقط (30 Ω). الملف أيضاً يستهلك قدرة، استعمل المقاومة الكلية.'}},
+  {id:'tan', title:'ظل زاوية فرق الطور tan Φ', unit:'', ans:-.75, tol:.01,
+   hint:'<span class="ltr">tan Φ = (X<sub>L</sub> − X<sub>C</sub>) / R<sub>total</sub></span>، وانتبه للإشارة.',
+   work:'<span class="ltr">tan Φ = (50 − 80) / 40 = −30 / 40 = −3/4</span>', sign:true},
+  {id:'phi', title:'زاوية فرق الطور Φ (بالدرجات)', unit:'°', ans:-37, tol:1.2, main:'المطلوب 3',
+   hint:'الزاوية التي ظلها <span class="ltr">3/4</span> هي <span class="ltr">37°</span>، والإشارة نفس إشارة tan Φ.',
+   work:'<span class="ltr">Φ = tan⁻¹(−3/4) ≈ −37°</span> (الإشارة السالبة تعني أن الفولطية تتأخر عن التيار)', sign:true}
+];
+
+function renderSteps(){
+  const box = $('#steps'); box.innerHTML='';
+  steps.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='step'+(i>0?' locked':''); d.id='st-'+s.id;
+    d.innerHTML=`<div class="step-head"><span class="badge">${i+1}</span>${s.title}${s.main?` <span class="main-tag">${s.main}</span>`:''}</div>
+      <div class="row">
+        <input type="text" inputmode="decimal" id="in-${s.id}" placeholder="?" aria-label="${s.title}">
+        <span class="unit">${s.unit}</span>
+        <button class="btn-check" data-a="check">تحقق</button>
+        <button class="btn-ghost" data-a="hint">💡 تلميح</button>
+        <button class="btn-ghost" data-a="show">اعرض الحل</button>
+      </div>
+      <div class="fb" id="fb-${s.id}"></div>
+      <div class="work" id="wk-${s.id}">${s.work}</div>`;
+    d.querySelector('[data-a=check]').onclick=()=>check(i);
+    d.querySelector('[data-a=hint]').onclick=()=>{setFb(s.id,s.hint,'info')};
+    d.querySelector('[data-a=show]').onclick=()=>finish(i,false);
+    d.querySelector('input').addEventListener('keydown',e=>{if(e.key==='Enter')check(i)});
+    box.appendChild(d);
+  });
+}
+function setFb(id,html,cls){const f=$('#fb-'+id);f.innerHTML=html;f.className='fb '+cls}
+
+function check(i){
+  const s=steps[i]; if(state[s.id]) return;
+  const raw=norm($('#in-'+s.id).value);
+  if(raw===''){setFb(s.id,'اكتب إجابتك أولاً.','info');return}
+  const v=parseFloat(raw);
+  if(isNaN(v)){setFb(s.id,'أدخل رقماً فقط.','bad');return}
+  if(Math.abs(v-s.ans)<=s.tol){finish(i,true);return}
+  if(s.sign && Math.abs(-v-s.ans)<=s.tol){setFb(s.id,'القيمة صحيحة لكن الإشارة خاطئة. قارن X<sub>L</sub> مع X<sub>C</sub>.','bad');return}
+  if(s.trap && Math.abs(v-s.trap.v)<=s.tol){setFb(s.id,s.trap.msg,'bad');return}
+  setFb(s.id,'غير صحيح، حاول مرة أخرى أو اطلب تلميحاً.','bad');
+}
+
+function finish(i,ok){
+  const s=steps[i]; if(state[s.id]) return;
+  state[s.id]=ok?'ok':'rev';
+  const el=$('#st-'+s.id); el.classList.add(ok?'correct':'revealed');
+  el.querySelectorAll('input,button').forEach(b=>b.disabled=true);
+  if(!ok) $('#in-'+s.id).value=s.ans;
+  setFb(s.id, ok?'✔ إجابة صحيحة!':'تم عرض الحل (لا تُحتسب درجة).', ok?'ok':'info');
+  $('#wk-'+s.id).classList.add('show');
+  if(i+1<steps.length){ $('#st-'+steps[i+1].id).classList.remove('locked'); setTimeout(()=>$('#in-'+steps[i+1].id).focus(),50); }
+  else { $('#natureStep').classList.remove('locked'); $('#diagBox').classList.remove('locked'); draw(80); }
+  update();
+}
+
+function mcq(containerId, fbId, key, options, correctIdx, explain, onDone){
+  const c=$(containerId); c.innerHTML='';
+  options.forEach((o,j)=>{
+    const b=document.createElement('button'); b.className='opt'; b.innerHTML=o;
+    b.onclick=()=>{
+      if(state[key]) return;
+      const ok=j===correctIdx; state[key]=ok?'ok':'bad';
+      c.querySelectorAll('.opt').forEach((x,k)=>{x.disabled=true; if(k===correctIdx)x.classList.add('right')});
+      if(!ok) b.classList.add('wrong');
+      if(fbId){const f=$(fbId); f.innerHTML=(ok?'✔ صحيح. ':'✘ خطأ. ')+explain; f.className='fb '+(ok?'ok':'bad');}
+      onDone && onDone(ok); update();
+    };
+    c.appendChild(b);
+  });
+}
+
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+function mcqShuffled(containerId, fbId, key, correct, wrongs, explain, onDone){
+  const all=shuffle([correct,...wrongs]);
+  mcq(containerId, fbId, key, all, all.indexOf(correct), explain, onDone);
+}
+
+/* ===== Diagram ===== */
+function draw(xc){
+  const XL=50, R=40, V=100;
+  const X=XL-xc, Z=Math.hypot(R,X), phi=Math.atan2(X,R)*180/Math.PI;
+  const k=1.5, ox=90, oy=170;
+  const svg=$('#svg');
+  const ar=(x1,y1,x2,y2,col,w=3,dash='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" ${dash?`stroke-dasharray="${dash}"`:''} marker-end="url(#m${col.slice(1)})"/>`;
+  const t=(x,y,s,col,anchor='middle')=>`<text x="${x}" y="${y}" fill="${col}" font-size="14" font-weight="700" text-anchor="${anchor}" font-family="JetBrains Mono,monospace" direction="ltr">${s}</text>`;
+  const cols=['#2f6fd6','#c0392b','#1f8a5b','#7a3fb5','#d98a1c'];
+  let defs='<defs>'+cols.map(c=>`<marker id="m${c.slice(1)}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${c}"/></marker>`).join('')+'</defs>';
+  const rx=ox+R*k, xy=oy-X*k;
+  let g=defs;
+  g+=`<line x1="20" y1="${oy}" x2="360" y2="${oy}" stroke="#d6d0c2"/><line x1="${ox}" y1="10" x2="${ox}" y2="320" stroke="#d6d0c2"/>`;
+  g+=t(350,oy-8,'I','#9a948a');
+  g+=ar(ox,oy,ox,oy-XL*k,'#2f6fd6')+t(ox-30,oy-XL*k+6,'X_L='+XL,'#2f6fd6');
+  if(xc>0) g+=ar(ox,oy,ox,oy+xc*k,'#c0392b')+t(ox-30,oy+xc*k,'X_C='+xc,'#c0392b');
+  g+=ar(ox,oy,rx,oy,'#1f8a5b')+t((ox+rx)/2,oy+(X>=0?18:-8),'R='+R,'#1f8a5b');
+  if(Math.abs(X)>0.5) g+=ar(rx,oy,rx,xy,'#d98a1c',2.5,'6 4')+t(rx+8,(oy+xy)/2+5,'X='+X,'#d98a1c','start');
+  g+=ar(ox,oy,rx,xy,'#7a3fb5',3.5)+t((ox+rx)/2+(X>=0?-14:-18),(oy+xy)/2+(X>=0?-6:16),'Z='+Z.toFixed(1),'#7a3fb5');
+  if(Math.abs(phi)>1){
+    const r=34, a=phi*Math.PI/180, ex=ox+r*Math.cos(a), ey=oy-r*Math.sin(a);
+    g+=`<path d="M${ox+r},${oy} A${r},${r} 0 0 ${phi>0?0:1} ${ex},${ey}" fill="none" stroke="#1d2433" stroke-width="1.5"/>`;
+    g+=t(ox+r+16,oy+(phi>0?-6:16),'Φ','#1d2433');
+  }
+  svg.innerHTML=g;
+  const I=V/Z, P=I*I*R;
+  $('#stats').innerHTML=[
+    ['X<sub>L</sub>',XL+' Ω'],['X<sub>C</sub>',xc+' Ω'],['R<sub>total</sub>',R+' Ω'],
+    ['Z',Z.toFixed(1)+' Ω'],['Φ',phi.toFixed(1)+'°'],['I = V/Z',I.toFixed(2)+' A'],['P = I²R',P.toFixed(0)+' W']
+  ].map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('');
+  const nl=$('#natureLive');
+  if(X>0){nl.textContent='الدائرة حثية (الفولطية تتقدم على التيار)';nl.style.background='#e6eefb';nl.style.color='#2f6fd6'}
+  else if(X<0){nl.textContent='الدائرة سعوية (الفولطية تتأخر عن التيار)';nl.style.background='#fbe9e7';nl.style.color='#c0392b'}
+  else{nl.textContent='رنين: الدائرة مقاومة صرف (Φ = 0)';nl.style.background='#e6f4ec';nl.style.color='#1f8a5b'}
+}
+$('#xcSlider').oninput=e=>draw(+e.target.value);
+$('#backBtn').onclick=()=>{$('#xcSlider').value=80;draw(80)};
+
+/* ===== Part B ===== */
+const bqs=[
+  {key:'b1', q:'تأثير كومبتن هو من أحد الأدلة التي تؤكد السلوك الدقائقي للأشعة الكهرومغناطيسية.',
+   c:'لأن الفوتون الساقط على هدف الكرافيت يتصادم مع إلكترون حر فيفقد مقداراً من طاقته، ويكتسب الإلكترون طاقة حركية تمكّنه من الإفلات من مادة الهدف، أي أن الفوتون يسلك سلوك الجسيمات.',
+   w:['لأن الفوتون يحيد عند مروره خلال شق ضيق في هدف الكرافيت فيظهر نمط حيود.',
+      'لأن الفوتون يتداخل مع نفسه بعد اصطدامه بالهدف فتظهر هدب مضيئة ومظلمة.',
+      'لأن الفوتون يمتص كلياً من قبل نواة ذرة الكرافيت فتزداد كتلة النواة.'],
+   model:'لأن العالم كومبتن فسر ذلك بأن الفوتون الساقط على هدف الكرافيت يتصادم مع إلكترون حر من إلكترونات ذرات مادة الهدف فاقداً مقداراً من طاقته، ويكتسب هذا الإلكترون بعد التصادم مقداراً من الطاقة بشكل طاقة حركية تمكّنه من الإفلات من مادة الهدف (أي أن الفوتون يسلك سلوك الجسيمات).'},
+  {key:'b2', q:'المتسعة الموضوعة في دائرة التيار المستمر تُعدّ مفتاحاً مفتوحاً.',
+   c:'لأنها عندما تُشحن بكامل شحنتها يصبح فرق جهدها (ΔV) مساوياً لفرق جهد البطارية، فيكون فرق الجهد بين طرفي المقاومة صفراً، وعندئذ يكون التيار في الدائرة صفراً.',
+   w:['لأن الرادة السعوية في التيار المستمر تساوي صفراً فلا يمر تيار.',
+      'لأن الشحنات تعبر المادة العازلة بين الصفيحتين ثم تتوقف بعد مدة.',
+      'لأن البطارية تفرغ شحنتها بالكامل في المتسعة فيصبح جهدها صفراً.'],
+   model:'لأن المتسعة عندما تُشحن بكامل شحنتها يكون جهد كل صفيحة منها مساوياً لجهد القطب المتصل بها في البطارية، وهذا يعني أن فرق جهد البطارية يساوي فرق جهد المتسعة (ΔV)، وهذا يجعل فرق الجهد بين طرفي المقاومة يساوي صفراً، وعندئذ يكون التيار في الدائرة يساوي صفراً.'},
+  {key:'b3', q:'المادة العازلة لا تمتلك قابلية التوصيل الكهربائي.',
+   c:'لأن فجوة الطاقة المحظورة فيها واسعة نسبياً (حوالي 5eV أو أكثر)، فلا تتمكن الإلكترونات من عبورها والانتقال إلى حزمة التوصيل.',
+   w:['لأن المادة العازلة لا تحتوي على إلكترونات في حزمة التكافؤ.',
+      'لأن فجوة الطاقة المحظورة فيها ضيقة جداً فتتداخل حزمة التكافؤ مع حزمة التوصيل.',
+      'لأن حزمة التوصيل فيها مملوءة بالإلكترونات فلا يوجد مكان لحركتها.'],
+   model:'وذلك بسبب أن فجوة الطاقة المحظورة تكون واسعة نسبياً (مقدارها حوالي 5eV) أو أكثر من ذلك، لذلك الإلكترونات لا تتمكن من عبور فجوة الطاقة المحظورة والانتقال إلى حزمة التوصيل عندما تكون الطاقة المجهزة أقل من فجوة الطاقة المحظورة.'}
+];
+function renderB(){
+  const box=$('#bqs'); box.innerHTML='';
+  bqs.forEach((b,i)=>{
+    const d=document.createElement('div'); d.className='step bq'; d.id='bq-'+b.key;
+    d.innerHTML=`<div class="step-head"><span class="badge">${i+1}</span>${b.q}</div>
+      <div class="opts" id="o-${b.key}"></div>
+      <div class="fb" id="f-${b.key}"></div>
+      <button class="btn-ghost" style="margin-top:8px" id="mb-${b.key}">📘 الجواب النموذجي</button>
+      <div class="model" id="m-${b.key}">${b.model}</div>`;
+    box.appendChild(d);
+    d.querySelector('#mb-'+b.key).onclick=()=>$('#m-'+b.key).classList.toggle('show');
+    mcqShuffled('#o-'+b.key,'#f-'+b.key,b.key,b.c,b.w,'',()=>{
+      $('#m-'+b.key).classList.add('show');
+      d.classList.add(state[b.key]==='ok'?'correct':'revealed');
+      const answered=bqs.filter(x=>state[x.key]);
+      if(answered.length>=2) bqs.filter(x=>!state[x.key]).forEach(x=>$('#bq-'+x.key).classList.add('dim'));
+    });
+  });
+}
+
+/* ===== Score ===== */
+function update(){
+  let pts=0, done=0;
+  steps.forEach(s=>{if(state[s.id])done++; if(state[s.id]==='ok')pts++});
+  ['nature','diag'].forEach(k=>{if(state[k])done++; if(state[k]==='ok')pts++});
+  const b=bqs.filter(x=>state[x.key]).slice(0,2);
+  b.forEach(x=>{done++; if(state[x.key]==='ok')pts++});
+  $('#scoreTxt').textContent=pts+' / '+TOTAL;
+  $('#prog').style.width=(done/TOTAL*100)+'%';
+  if(done>=TOTAL){
+    const rc=$('#resultCard'); rc.style.display='block';
+    $('#finalScore').textContent=pts+' / '+TOTAL;
+    const pct=pts/TOTAL;
+    $('#finalMsg').textContent= pct>=.9?'ممتاز! أنت جاهز للوزاري 🌟': pct>=.7?'جيد جداً، راجع الخطوات التي عُرض حلها.': pct>=.5?'مقبول، أعد المحاولة بعد مراجعة قوانين دائرة RLC.':'تحتاج مراجعة، اضغط "إعادة" وحاول مرة أخرى مستعيناً بالتلميحات.';
+    rc.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function init(){
+  for(const k in state) delete state[k];
+  renderSteps(); renderB();
+  $('#natureStep').className='step locked'; $('#natureFb').textContent='';
+  $('#diagBox').classList.add('locked'); $('#diagStep').className='step'; $('#diagFb').textContent='';
+  $('#resultCard').style.display='none'; $('#xcSlider').value=80; draw(80);
+  mcq('#natureOpts','#natureFb','nature',
+    ['حثية، لأن X<sub>L</sub> &gt; X<sub>C</sub>','سعوية، لأن X<sub>C</sub> &gt; X<sub>L</sub> (Φ سالبة)','مقاومة صرف (حالة رنين)'],1,
+    'لأن <span class="ltr">X<sub>C</sub> = 80 Ω &gt; X<sub>L</sub> = 50 Ω</span>، فالزاوية سالبة والفولطية الكلية تتأخر عن التيار بزاوية <span class="ltr">37°</span>.',
+    ok=>$('#natureStep').classList.add(ok?'correct':'revealed'));
+  mcq('#diagOpts','#diagFb','diag',
+    ['فوق محور R (الربع الأول)','تحت محور R (الربع الرابع)','منطبق على محور R'],1,
+    'محصلة الرادة <span class="ltr">X = X<sub>L</sub> − X<sub>C</sub> = −30 Ω</span> باتجاه X<sub>C</sub> (للأسفل)، لذلك يقع Z تحت محور R بزاوية <span class="ltr">37°</span>.',
+    ok=>$('#diagStep').classList.add(ok?'correct':'revealed'));
+  update();
+}
+$('#resetBtn').onclick=()=>{init();window.scrollTo({top:0,behavior:'smooth'})};
+init();
+</script>
+</body>
+</html>

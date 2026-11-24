@@ -1,0 +1,11 @@
+# publish only the website files
+/*
+!/.gitignore
+!/index.html
+!/fonts/
+!/0*.html
+!/10*.html
+!/AI in Engineering - Research Paper.pdf
+!/الذكاء الاصطناعي في الهندسة.pdf
+!/Tooth Decay and Gum Disease Around the World.pdf
+!/.nojekyll

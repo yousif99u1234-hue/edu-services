@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3e6c8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#221d17" media="(prefers-color-scheme: dark)">
+<title>خدمات للقطاع التعليمي</title>
+<meta name="description" content="دروس تفاعلية، امتحانات مصمّمة، عروض تقديمية، وبحوث وتقارير — خدمات للمدرّسين والمدارس والجامعات.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Thmanyah Sans";src:url("fonts/thmanyah-sans-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("fonts/thmanyah-sans-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("fonts/thmanyah-sans-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("fonts/thmanyahsans-Black.otf") format("opentype");font-weight:900;font-display:swap}
+@font-face{font-family:"Thmanyah Serif Display";src:url("fonts/thmanyahserifdisplay-Black.otf") format("opentype");font-weight:900;font-display:swap}
+@font-face{font-family:"Thmanyah Serif Text";src:url("fonts/thmanyahseriftext-Black.otf") format("opentype");font-weight:900;font-display:swap}
+:root{
+  --paper:#f3e6c8; --paper-2:#ead8b0; --ink:#1d1a16; --ink-soft:#4a4036;
+  --teal:#5f9a92; --teal-deep:#2f5f5a; --wood:#8a5a32; --wood-dark:#5b3a1f;
+  --rust:#c0543a; --mustard:#d9a441; --screen:#9fd0c4; --sage:#b9c7a8;
+  --shadow:6px 6px 0 var(--ink);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#221d17; --paper-2:#2c251d; --ink:#f0e2c2; --ink-soft:#c8b896;
+    --teal:#6fb0a6; --teal-deep:#1c3a37; --wood:#a87245; --wood-dark:#3a2614;
+    --rust:#e06a4f; --mustard:#e5b450; --screen:#2f5f5a; --sage:#3f4a36;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#221d17; --paper-2:#2c251d; --ink:#f0e2c2; --ink-soft:#c8b896;
+  --teal:#6fb0a6; --teal-deep:#1c3a37; --wood:#a87245; --wood-dark:#3a2614;
+  --rust:#e06a4f; --mustard:#e5b450; --screen:#2f5f5a; --sage:#3f4a36;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Thmanyah Sans",system-ui,sans-serif; font-size:18px; line-height:1.9;
+  background-image:radial-gradient(color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1.2px);
+  background-size:7px 7px; overflow-x:hidden;
+}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.mono{font-family:"VT323",monospace;letter-spacing:.5px}
+h1,h2,h3{font-family:"Thmanyah Serif Display",serif;font-weight:900;line-height:1.25;margin:0}
+
+/* top bar */
+.bar{border-bottom:3px solid var(--ink);background:var(--paper-2);position:sticky;top:0;z-index:50}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:10px;gap:12px}
+.bar .mono{font-size:22px}
+.bar nav{display:flex;gap:18px;font-weight:700;font-size:16px}
+.bar nav a{text-decoration:none}
+.bar nav a:hover{color:var(--rust)}
+.btn{
+  display:inline-block;font-family:"Thmanyah Sans",sans-serif;font-weight:900;font-size:20px;text-decoration:none;
+  background:var(--rust);color:#fff8ea;border:3px solid var(--ink);padding:8px 20px 4px;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .1s,box-shadow .1s;cursor:pointer
+}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.alt{background:var(--teal);color:#fff8ea}
+.btn.ghost{background:var(--paper);color:var(--ink)}
+
+/* hero */
+.hero{padding:48px 0 24px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.kicker{display:inline-block;background:var(--mustard);color:#1d1a16;border:2px solid var(--ink);padding:2px 12px 0;font-size:17px;font-weight:700;transform:rotate(-1.5deg)}
+.hero h1{font-size:clamp(42px,6.6vw,76px);margin:16px 0 8px}
+.hero h1 em{font-style:normal;color:var(--rust)}
+.hero p.lead{font-size:21px;color:var(--ink-soft);margin:0 0 24px;max-width:32ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.panel{border:3px solid var(--ink);background:var(--paper-2);box-shadow:var(--shadow)}
+.hero svg{width:100%;height:auto;display:block}
+svg text{direction:ltr;unicode-bidi:isolate}
+
+/* sections */
+.section{padding:56px 0}
+.label{font-family:"VT323",monospace;font-size:22px;color:var(--rust);margin-bottom:6px}
+.section h2{font-size:clamp(32px,5vw,48px);margin-bottom:10px}
+.section .sub{font-size:19px;color:var(--ink-soft);margin:0 0 26px;max-width:52ch}
+
+/* services strip */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.cell{border:3px solid var(--ink);background:var(--paper-2);padding:20px 18px 18px;position:relative;box-shadow:4px 4px 0 var(--ink);text-decoration:none;display:block;transition:transform .12s,box-shadow .12s}
+a.cell:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.cell:nth-child(2){background:var(--sage)}
+.cell:nth-child(3){background:var(--screen)}
+.cell:nth-child(4){background:var(--mustard);color:#1d1a16}
+.cell .tag{position:absolute;top:-14px;right:14px;background:var(--ink);color:var(--paper);font-family:"VT323",monospace;font-size:18px;padding:0 8px}
+.cell h3{font-family:"Thmanyah Serif Text",serif;font-size:24px;margin:8px 0 4px}
+.cell p{margin:0;font-size:16.5px}
+.cell .ico{width:54px;height:54px;display:block;margin-bottom:6px}
+
+/* aphorisms / process */
+.aph{list-style:none;padding:0;margin:0;display:grid;gap:0;border-top:3px solid var(--ink)}
+.aph li{
+  display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:baseline;
+  padding:20px 4px;border-bottom:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);
+  font-family:"Thmanyah Serif Text",serif;font-weight:900;font-size:clamp(19px,2.4vw,23px)
+}
+.aph li .n{font-family:"VT323",monospace;font-size:30px;color:var(--teal)}
+.aph li small{display:block;font-family:"Thmanyah Sans",sans-serif;font-size:16px;font-weight:400;color:var(--ink-soft)}
+
+/* lesson cards */
+.lessons{display:grid;gap:22px}
+.card{
+  border:3px solid var(--ink);background:var(--paper-2);box-shadow:5px 5px 0 var(--ink);
+  display:flex;flex-direction:column;text-decoration:none;transition:transform .12s,box-shadow .12s
+}
+a.card:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 14px;border-bottom:3px solid var(--ink);background:var(--wood);color:#fff4dc}
+.card .top .mono{font-size:20px}
+.card .body{padding:16px 16px 18px;flex:1}
+.card h3{font-family:"Thmanyah Serif Text",serif;font-weight:900;font-size:19px;line-height:1.5;margin:0 0 6px}
+.card p{margin:0;font-size:16px;color:var(--ink-soft)}
+.card .go{font-family:"VT323",monospace;font-size:20px;padding:8px 16px;border-top:2px dashed var(--ink)}
+.lesson{background:var(--screen)}
+.lesson .top{background:var(--teal-deep)}
+.lesson.l2{background:var(--sage)}
+.lesson.l2 .top{background:var(--rust)}
+.lesson-grid{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:28px;padding:22px;align-items:center}
+.lesson-grid .body{padding:0}
+.lesson h3{font-family:"Thmanyah Serif Display",serif;font-weight:900;font-size:34px;margin-bottom:2px}
+.lesson .en{font-family:"VT323",monospace;font-size:20px;line-height:1.3;color:var(--ink-soft);direction:ltr;text-align:right;display:block;margin-bottom:8px}
+.lesson-line{font-family:"Thmanyah Serif Text",serif;font-size:20px !important;color:var(--ink) !important;font-weight:900;margin-bottom:12px !important}
+.steps{margin:0 0 14px;padding:0 22px 0 0;font-size:17px}
+.steps li{margin-bottom:4px}
+.steps li::marker{font-family:"VT323",monospace;color:var(--rust)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 4px}
+.meta span{font-family:"VT323",monospace;font-size:18px;border:2px solid var(--ink);background:var(--paper);padding:0 8px;line-height:1.5}
+.lesson-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.crt{background:var(--paper-2);border:3px solid var(--ink);border-radius:14px;padding:14px 14px 0;box-shadow:6px 6px 0 var(--ink)}
+.crt-screen{border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:#1d1a16;aspect-ratio:4/3}
+.crt-screen svg{display:block;width:100%;height:100%}
+.crt-base{display:flex;justify-content:space-between;align-items:center;padding:8px 2px 10px;color:var(--ink)}
+.crt-base .mono{font-size:18px}
+.crt-base i{width:12px;height:12px;border-radius:50%;background:var(--rust);border:2px solid var(--ink)}
+
+/* exams + docs */
+.res{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card.exam .top{background:var(--teal-deep)}
+.card.exam:nth-child(3n+2) .top{background:var(--wood)}
+.card.exam:nth-child(3n) .top{background:var(--rust)}
+.card.doc .top{background:var(--ink);color:var(--paper)}
+.res2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+/* order */
+.book{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.book .pitch p{font-size:20px;margin:0 0 14px}
+.book .pitch ul{padding:0 20px 0 0;margin:0 0 10px}
+.book .pitch li{margin-bottom:6px}
+.form{padding:22px}
+.form h3{font-family:"Thmanyah Serif Text",serif;font-size:26px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{
+  font-family:"Thmanyah Sans",sans-serif;font-weight:700;font-size:16px;border:2px solid var(--ink);background:var(--paper);
+  color:var(--ink);padding:6px 12px 4px;cursor:pointer;line-height:1.3;text-align:center
+}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.f-label{font-weight:700;font-size:16px;display:block;margin-bottom:6px}
+input,textarea{
+  width:100%;font:inherit;font-size:17px;background:var(--paper);color:var(--ink);
+  border:2px solid var(--ink);padding:8px 12px;margin-bottom:14px
+}
+textarea{min-height:90px;resize:vertical}
+.note{font-size:14px;color:var(--ink-soft);margin:10px 0 0}
+.status{font-family:"VT323",monospace;font-size:20px;color:var(--teal-deep);min-height:26px;margin-top:8px}
+:root[data-theme="dark"] .status{color:var(--teal)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .status{color:var(--teal)}}
+
+footer{border-top:3px solid var(--ink);background:var(--paper-2);padding:24px 0;margin-top:40px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer .mono{font-size:20px}
+
+/* white interactive cursor (mouse only) */
+.cur,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;opacity:0;transition:opacity .2s}
+.cur{width:18px;height:18px;margin:-9px 0 0 -9px;background:#fff;border:3px solid #1d1a16;box-shadow:3px 3px 0 #1d1a16}
+.cur-ring{
+  width:56px;height:56px;margin:-28px 0 0 -28px;border:3px solid #fff;
+  box-shadow:0 0 0 2px #1d1a16, inset 0 0 0 2px #1d1a16;
+  transition:opacity .2s,width .2s,height .2s,margin .2s,background .2s
+}
+.cur-on .cur,.cur-on .cur-ring{opacity:1}
+.cur-hover .cur-ring{width:88px;height:88px;margin:-44px 0 0 -44px;background:rgba(255,255,255,.28)}
+.cur-down .cur-ring{width:40px;height:40px;margin:-20px 0 0 -20px;background:rgba(255,255,255,.6)}
+.cur-text .cur,.cur-text .cur-ring{opacity:0}
+.cur-burst{position:fixed;pointer-events:none;z-index:9998;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #1d1a16;animation:burst .5s ease-out forwards}
+@keyframes burst{to{transform:scale(5);opacity:0}}
+@media (hover:hover) and (pointer:fine){
+  html.has-cur, html.has-cur *{cursor:none !important}
+  html.has-cur input, html.has-cur textarea{cursor:text !important}
+}
+@media (prefers-reduced-motion:reduce){.cur-burst{display:none} html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  .strip{grid-template-columns:repeat(2,1fr);row-gap:26px}
+  .res{grid-template-columns:repeat(2,1fr)}
+  .bar nav{display:none}
+}
+@media (max-width:760px){
+  body{font-size:17px}
+  .section{padding:36px 0}
+  .bar .mono{font-size:18px}
+  .bar .btn{font-size:16px;padding:6px 12px 4px}
+  .hero{padding-top:28px}
+  .hero p.lead{font-size:19px}
+  .hero-grid,.book,.lesson-grid{grid-template-columns:1fr}
+  .lesson-grid{padding:16px;justify-items:stretch}
+  .crt{width:min(340px,100%);justify-self:center}
+  .lesson h3{font-size:28px}
+  .strip,.res,.res2{grid-template-columns:1fr}
+  .aph li{grid-template-columns:44px 1fr}
+  .form{padding:16px}
+  .form .btn,.lesson-actions .btn{width:100%;text-align:center}
+}
+@media (hover:none){
+  a.card:hover,a.cell:hover,.btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="mono">&gt; EDU_SERVICES.EXE</span>
+    <nav aria-label="أقسام الصفحة">
+      <a href="#services">الخدمات</a>
+      <a href="#lessons">الدروس</a>
+      <a href="#exams">الامتحانات</a>
+      <a href="#docs">العروض والبحوث</a>
+    </nav>
+    <a class="btn" href="#order">اطلب خدمتك</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">خدمات للقطاع التعليمي</span>
+      <h1>الدرس الذي يُجرَّب<br><em>لا يُنسى.</em></h1>
+      <p class="lead">دروس تفاعلية، امتحانات بتصميم يليق بطلابك، وعروض وبحوث جاهزة للطباعة — من فكرتك إلى الصف.</p>
+      <div class="hero-actions">
+        <a class="btn alt" href="#lessons">جرّب درسًا ↓</a>
+        <a class="btn ghost" href="#order">اطلب خدمتك</a>
+      </div>
+    </div>
+    <div class="panel" aria-hidden="true">
+      <!-- retro classroom illustration -->
+      <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="360" fill="var(--paper-2)"/>
+        <!-- wall -->
+        <rect x="0" y="0" width="400" height="246" fill="var(--sage)"/>
+        <g stroke="var(--ink)" stroke-width="2" opacity=".25">
+          <line x1="0" y1="40" x2="400" y2="40"/><line x1="0" y1="80" x2="400" y2="80"/>
+        </g>
+        <!-- chalkboard -->
+        <g stroke="var(--ink)" stroke-width="3">
+          <rect x="28" y="22" width="232" height="150" fill="var(--wood)"/>
+          <rect x="38" y="32" width="212" height="130" fill="var(--teal-deep)"/>
+          <rect x="60" y="172" width="188" height="8" fill="var(--wood)"/>
+        </g>
+        <!-- cell drawing on board -->
+        <g fill="none" stroke="#f6edd2" stroke-width="3">
+          <ellipse cx="112" cy="98" rx="52" ry="40"/>
+          <circle cx="104" cy="96" r="14"/>
+          <path d="M78 76 q8 -6 16 0 M128 120 q8 6 16 0 M140 80 q6 8 0 14"/>
+        </g>
+        <circle cx="104" cy="96" r="5" fill="#f6edd2"/>
+        <text x="176" y="68" font-family="VT323" font-size="18" fill="#f6edd2">23+23</text>
+        <text x="176" y="92" font-family="VT323" font-size="18" fill="var(--mustard)">=46 ✓</text>
+        <g stroke="#f6edd2" stroke-width="2"><line x1="176" y1="112" x2="236" y2="112"/><line x1="176" y1="126" x2="224" y2="126"/><line x1="176" y1="140" x2="232" y2="140"/></g>
+        <rect x="200" y="166" width="20" height="6" fill="#f6edd2" stroke="var(--ink)" stroke-width="2"/>
+        <!-- poster -->
+        <g transform="rotate(-3 330 70)" stroke="var(--ink)" stroke-width="3">
+          <rect x="290" y="26" width="84" height="98" fill="var(--mustard)"/>
+          <rect x="302" y="38" width="60" height="44" fill="var(--paper)"/>
+          <polyline points="306,76 320,62 332,70 346,50 358,58" fill="none" stroke="var(--rust)" stroke-width="3"/>
+          <line x1="302" y1="96" x2="362" y2="96" stroke-width="2"/><line x1="302" y1="108" x2="348" y2="108" stroke-width="2"/>
+        </g>
+        <!-- bookshelf -->
+        <g stroke="var(--ink)" stroke-width="3">
+          <rect x="286" y="148" width="100" height="98" fill="var(--wood-dark)"/>
+          <line x1="286" y1="196" x2="386" y2="196"/>
+        </g>
+        <g stroke="var(--ink)" stroke-width="2">
+          <rect x="294" y="156" width="12" height="40" fill="var(--rust)"/><rect x="306" y="160" width="10" height="36" fill="var(--teal)"/>
+          <rect x="316" y="154" width="14" height="42" fill="var(--paper)"/><rect x="330" y="160" width="10" height="36" fill="var(--mustard)"/>
+          <rect x="340" y="156" width="12" height="40" fill="var(--sage)"/>
+          <rect x="294" y="204" width="14" height="42" fill="var(--teal-deep)"/><rect x="308" y="208" width="10" height="38" fill="var(--mustard)"/>
+          <rect x="318" y="202" width="12" height="44" fill="var(--rust)"/><rect x="350" y="210" width="28" height="36" fill="var(--paper)"/>
+        </g>
+        <!-- desk -->
+        <rect x="0" y="246" width="400" height="22" fill="var(--wood)" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="0" y="268" width="400" height="92" fill="var(--paper)"/>
+        <g stroke="var(--ink)" stroke-width="2" opacity=".35"><line x1="0" y1="300" x2="400" y2="300"/><line x1="0" y1="334" x2="400" y2="334"/></g>
+        <!-- laptop with quiz -->
+        <g stroke="var(--ink)" stroke-width="3">
+          <rect x="132" y="170" width="140" height="76" rx="6" fill="var(--paper-2)"/>
+          <rect x="142" y="178" width="120" height="60" fill="var(--screen)"/>
+          <path d="M116 246 h172 l-10 10 h-152 z" fill="var(--paper)"/>
+        </g>
+        <text x="150" y="196" font-family="VT323" font-size="14" fill="#1d1a16">QUIZ 3/6</text>
+        <g stroke="#1d1a16" stroke-width="2">
+          <rect x="150" y="204" width="48" height="12" fill="#f6edd2"/><rect x="206" y="204" width="48" height="12" fill="var(--rust)"/>
+          <rect x="150" y="220" width="48" height="12" fill="#f6edd2"/><rect x="206" y="220" width="48" height="12" fill="#f6edd2"/>
+        </g>
+        <!-- exam paper + pencil -->
+        <g transform="rotate(-6 60 230)" stroke="var(--ink)" stroke-width="2">
+          <rect x="24" y="200" width="78" height="46" fill="#f6edd2"/>
+          <line x1="32" y1="212" x2="92" y2="212"/><line x1="32" y1="222" x2="86" y2="222"/><line x1="32" y1="232" x2="90" y2="232"/>
+        </g>
+        <g transform="rotate(30 330 262)" stroke="var(--ink)" stroke-width="2">
+          <rect x="300" y="256" width="62" height="10" fill="var(--mustard)"/>
+          <path d="M362 256 l12 5 l-12 5 z" fill="var(--paper)"/>
+          <rect x="294" y="256" width="6" height="10" fill="var(--rust)"/>
+        </g>
+        <!-- apple -->
+        <g stroke="var(--ink)" stroke-width="3">
+          <circle cx="62" cy="300" r="18" fill="var(--rust)"/>
+          <path d="M62 282 q2 -10 10 -12" fill="none"/>
+        </g>
+        <path d="M66 278 q10 -8 16 0 q-8 6 -16 0z" fill="var(--teal)" stroke="var(--ink)" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="label">// 01 — الخدمات</div>
+    <h2>أربع خدمات. معيار واحد.</h2>
+    <p class="sub">كل عمل يُصمَّم من الصفر لمادتك وصفّك، بخط عربي واضح وتنسيق جاهز للشاشة والطباعة.</p>
+    <div class="strip">
+      <a class="cell" href="#lessons">
+        <span class="tag mono">01</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="3" y="7" width="48" height="34" rx="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><path d="M22 16 l14 8 l-14 8z" fill="var(--rust)" stroke="var(--ink)" stroke-width="2"/><rect x="16" y="44" width="22" height="5" fill="var(--ink)"/></svg>
+        <h3>دروس تفاعلية</h3>
+        <p>شرح، رسوم تتفاعل مع الطالب، وتمارين تصحّح نفسها. تُفتح برابط من أي جهاز.</p>
+      </a>
+      <a class="cell" href="#exams">
+        <span class="tag mono">02</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="9" y="4" width="36" height="46" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><path d="M16 16 l4 4 l7 -8" fill="none" stroke="var(--teal-deep)" stroke-width="3"/><g stroke="var(--ink)" stroke-width="2"><line x1="30" y1="16" x2="39" y2="16"/><line x1="16" y1="28" x2="39" y2="28"/><line x1="16" y1="36" x2="34" y2="36"/></g></svg>
+        <h3>امتحانات مصمّمة</h3>
+        <p>من صورة الأسئلة إلى ورقة أنيقة — رسمية، ملوّنة للأطفال، أو تفاعلية على الشاشة.</p>
+      </a>
+      <a class="cell" href="#docs">
+        <span class="tag mono">03</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="4" y="6" width="46" height="30" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><g stroke="var(--ink)" stroke-width="3"><rect x="12" y="20" width="7" height="10" fill="var(--mustard)"/><rect x="23" y="14" width="7" height="16" fill="var(--rust)"/><rect x="34" y="17" width="7" height="13" fill="var(--teal)"/><line x1="27" y1="36" x2="27" y2="46"/><line x1="17" y1="48" x2="37" y2="48"/></g></svg>
+        <h3>عروض تقديمية</h3>
+        <p>سلايدات بستايل مدروس، تُصدَّر PowerPoint أو PDF وتُعرض مباشرة.</p>
+      </a>
+      <a class="cell" href="#docs">
+        <span class="tag mono">04</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><path d="M8 8 h26 l12 12 v28 h-38z" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><path d="M34 8 v12 h12" fill="none" stroke="var(--ink)" stroke-width="3"/><g stroke="var(--ink)" stroke-width="2"><line x1="15" y1="26" x2="39" y2="26"/><line x1="15" y1="33" x2="39" y2="33"/><line x1="15" y1="40" x2="30" y2="40"/></g></svg>
+        <h3>بحوث وتقارير</h3>
+        <p>بحث علمي أو تقرير منسّق بالمراجع والأشكال، بنسختي Word وPDF.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lessons">
+  <div class="wrap">
+    <div class="label">// 02 — الدروس التفاعلية</div>
+    <h2>لا تقرأ عنها. جرّبها.</h2>
+    <p class="sub">درسان حيّان على الإنترنت. افتح أيًّا منهما واضغط، اسحب، وأجب — هكذا يتعلّم طلابك.</p>
+
+    <div class="lessons">
+      <div class="card lesson">
+        <div class="top"><span>أحياء · عربي</span><span class="mono">LESSON_01 · CELL</span></div>
+        <div class="lesson-grid">
+          <div class="crt" aria-hidden="true">
+            <div class="crt-screen">
+              <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="240" fill="#2f5f5a"/>
+                <g fill="none" stroke="#f6edd2" stroke-width="3">
+                  <ellipse cx="140" cy="124" rx="104" ry="78"/>
+                </g>
+                <ellipse cx="140" cy="124" rx="104" ry="78" fill="#9fd0c4" opacity=".25"/>
+                <circle cx="126" cy="118" r="30" fill="#d9a441" stroke="#f6edd2" stroke-width="3"/>
+                <circle cx="132" cy="112" r="9" fill="#c0543a" stroke="#1d1a16" stroke-width="2"/>
+                <g fill="#b9c7a8" stroke="#f6edd2" stroke-width="2">
+                  <ellipse cx="196" cy="86" rx="18" ry="9" transform="rotate(20 196 86)"/>
+                  <ellipse cx="80" cy="170" rx="16" ry="8" transform="rotate(-15 80 170)"/>
+                  <ellipse cx="200" cy="164" rx="14" ry="7"/>
+                </g>
+                <circle cx="76" cy="90" r="12" fill="none" stroke="#f6edd2" stroke-width="2" stroke-dasharray="4 3"/>
+                <line x1="158" y1="118" x2="268" y2="60" stroke="#f6edd2" stroke-width="2"/>
+                <rect x="240" y="44" width="74" height="22" fill="#f6edd2" stroke="#1d1a16" stroke-width="2"/>
+                <text x="277" y="60" text-anchor="middle" font-family="VT323, monospace" font-size="15" fill="#1d1a16">NUCLEUS</text>
+                <text x="14" y="228" font-family="VT323" font-size="16" fill="#f6edd2">&gt; CLICK A PART_</text>
+              </svg>
+            </div>
+            <div class="crt-base"><span class="mono">● LIVE · GITHUB</span><i></i></div>
+          </div>
+          <div class="body">
+            <h3>مكوّنات الخلية</h3>
+            <span class="en">Interactive lesson · Cell components</span>
+            <p class="lesson-line">من الهيكل الخلوي إلى الكروموسومات — كل جزء تضغط عليه يحكي قصته.</p>
+            <ol class="steps">
+              <li>اضغط على تراكيب الهيكل الخلوي لتتعرّف على كل واحد.</li>
+              <li>رتّب خطوات الهضم داخل الفجوة الغذائية.</li>
+              <li>طابق المحتويات غير الحية مع أماكنها في الخلية.</li>
+              <li>اضغط جزءًا من النواة ليُضاء في الرسم.</li>
+              <li>استكشف عدد الكروموسومات: 23 + 23 = 46، ثم اختبار ذاتي.</li>
+            </ol>
+            <div class="meta"><span>ARABIC</span><span>SELF-CHECKS</span><span>QUIZ</span></div>
+            <div class="lesson-actions">
+              <a class="btn alt" href="https://yousif99u1234-hue.github.io/cell-lesson/" target="_blank" rel="noopener">افتح الدرس ↗</a>
+              <a class="btn ghost" href="#order">أريد درسًا مثله</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card lesson l2">
+        <div class="top"><span>طب أسنان · عربي / English</span><span class="mono">LESSON_02 · ZYGOMATIC</span></div>
+        <div class="lesson-grid">
+          <div class="crt" aria-hidden="true">
+            <div class="crt-screen">
+              <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="240" fill="#1d1a16"/>
+                <!-- skull-ish profile, simplified -->
+                <path d="M60 150 C 50 80, 110 30, 180 34 C 240 38, 272 86, 262 140 L 246 160 L 210 164 L 196 190 L 120 192 L 96 170 Z" fill="#ead8b0" stroke="#f6edd2" stroke-width="3"/>
+                <ellipse cx="200" cy="104" rx="22" ry="18" fill="#1d1a16"/>
+                <path d="M150 126 q30 -6 60 4 l-6 26 q-26 -6 -50 -2 z" fill="#9fd0c4" opacity=".6" stroke="#1d1a16" stroke-width="2"/>
+                <!-- implant trajectory -->
+                <line x1="132" y1="186" x2="214" y2="112" stroke="#c0543a" stroke-width="7" stroke-linecap="round"/>
+                <g stroke="#1d1a16" stroke-width="2"><line x1="150" y1="172" x2="156" y2="176"/><line x1="166" y1="158" x2="172" y2="162"/><line x1="182" y1="144" x2="188" y2="148"/><line x1="198" y1="130" x2="204" y2="134"/></g>
+                <!-- slider -->
+                <rect x="24" y="212" width="200" height="6" fill="#4a4036"/>
+                <circle cx="150" cy="215" r="9" fill="#d9a441" stroke="#f6edd2" stroke-width="2"/>
+                <text x="308" y="220" text-anchor="end" font-family="VT323" font-size="15" fill="#9fd0c4">EXTRASINUS</text>
+                <text x="16" y="28" font-family="VT323" font-size="16" fill="#f6edd2">&gt; TRAJECTORY_</text>
+              </svg>
+            </div>
+            <div class="crt-base"><span class="mono">● LIVE · 9 MODULES</span><i></i></div>
+          </div>
+          <div class="body">
+            <h3>الزرعات الوجنية</h3>
+            <span class="en">Zygomatic Implants Lesson</span>
+            <p class="lesson-line">مراجعة علمية من 2026 تحوّلت إلى تسع وحدات تُقرأ وتُجرَّب — بالعربي والإنكليزي جنبًا إلى جنب.</p>
+            <ol class="steps">
+              <li>اسحب المنزلق لترى كيف يغيّر شكل الجدار الجانبي مسار الزرعة.</li>
+              <li>طابق كل مضاعفة مع طريقة علاجها.</li>
+              <li>محاكي حالة: أجب عن الأسئلة لتظهر التوصية.</li>
+              <li>ابنِ حجّتك: اربط الدليل بالاستنتاج ثم «افحص منطقي».</li>
+              <li>اختبار نهائي من 6 أسئلة ومسرد من 12 مصطلحًا.</li>
+            </ol>
+            <div class="meta"><span>BILINGUAL</span><span>~40 MIN</span><span>CASE SIM</span></div>
+            <div class="lesson-actions">
+              <a class="btn" href="https://yousif99u1234-hue.github.io/cell-lesson/zygomatic/" target="_blank" rel="noopener">افتح الدرس ↗</a>
+              <a class="btn ghost" href="#order">أريد درسًا مثله</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="exams">
+  <div class="wrap">
+    <div class="label">// 03 — الامتحانات</div>
+    <h2>نفس الأسئلة. عشرة أشكال.</h2>
+    <p class="sub">تصلنا الأسئلة صورةً من الدفتر، وتخرج ورقة امتحان بستايل يناسب المرحلة. افتح أي نموذج.</p>
+    <div class="res">
+      <a class="card exam" href="01%20-%20فيزياء%20السادس%20العلمي%20-%20امتحان%20تفاعلي.html" target="_blank">
+        <div class="top"><span>فيزياء</span><span class="mono">INTERACTIVE</span></div>
+        <div class="body"><h3>السادس العلمي — امتحان تفاعلي</h3><p>يُحلّ على الشاشة ويُصحَّح فورًا.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="02%20-%20رياضيات%20الخامس%20الابتدائي%20-%20رسمي.html" target="_blank">
+        <div class="top"><span>رياضيات</span><span class="mono">FORMAL</span></div>
+        <div class="body"><h3>الخامس الابتدائي — رسمي</h3><p>ورقة نظيفة بترويسة المدرسة، جاهزة للطباعة.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="03%20-%20رياضيات%20الخامس%20الابتدائي%20-%20ملون%20للأطفال.html" target="_blank">
+        <div class="top"><span>رياضيات</span><span class="mono">KIDS</span></div>
+        <div class="body"><h3>الخامس الابتدائي — ملوّن للأطفال</h3><p>ألوان ورسوم تخفّف رهبة الامتحان.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="04%20-%20كيمياء%20الثالث%20المتوسط%20-%20ستايل%20رسمي%20كلاسيكي.html" target="_blank">
+        <div class="top"><span>كيمياء</span><span class="mono">CLASSIC</span></div>
+        <div class="body"><h3>الثالث المتوسط — رسمي كلاسيكي</h3><p>الشكل الذي يعرفه كل مدرّس، بتنسيق أدق.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="05%20-%20كيمياء%20الثالث%20المتوسط%20-%20ستايل%20المختبر.html" target="_blank">
+        <div class="top"><span>كيمياء</span><span class="mono">LAB</span></div>
+        <div class="body"><h3>الثالث المتوسط — ستايل المختبر</h3><p>ورقة بروح دفتر التجارب.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="06%20-%20انكليزي%20الرابع%20الاعدادي%20-%20ستايل%20المجلة.html" target="_blank">
+        <div class="top"><span>إنكليزي</span><span class="mono">MAGAZINE</span></div>
+        <div class="body"><h3>الرابع الإعدادي — ستايل المجلة</h3><p>امتحان يُقرأ كأنه صفحة مجلة.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="07%20-%20اجتماعيات%20الثاني%20المتوسط%20-%20ستايل%20مجلة%20قديمة.html" target="_blank">
+        <div class="top"><span>اجتماعيات</span><span class="mono">VINTAGE</span></div>
+        <div class="body"><h3>الثاني المتوسط — مجلة قديمة</h3><p>ورق عتيق يناسب التاريخ والجغرافيا.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="08%20-%20فيزياء%20الخامس%20العلمي%20-%20ستايل%20انفوغرافيك.html" target="_blank">
+        <div class="top"><span>فيزياء</span><span class="mono">INFOGRAPHIC</span></div>
+        <div class="body"><h3>الخامس العلمي — إنفوغرافيك</h3><p>الأسئلة مرسومة كخرائط معلومات.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="09%20-%20عربي%20الابتدائية%20-%20ستايل%20بوستر%20يزد.html" target="_blank">
+        <div class="top"><span>عربي</span><span class="mono">POSTER</span></div>
+        <div class="body"><h3>الابتدائية — بوستر يزد</h3><p>زخرفة وخط بروح البوستر.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+      <a class="card exam" href="10%20-%20احياء%20الثاني%20المتوسط%20-%20ستايل%20غلاف%20علمي.html" target="_blank">
+        <div class="top"><span>أحياء</span><span class="mono">SCI-COVER</span></div>
+        <div class="body"><h3>الثاني المتوسط — غلاف علمي</h3><p>بإطلالة غلاف مجلة علمية.</p></div>
+        <div class="go">&gt; OPEN_EXAM</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="docs">
+  <div class="wrap">
+    <div class="label">// 04 — العروض والبحوث</div>
+    <h2>للجامعة أيضًا.</h2>
+    <p class="sub">بحوث بمراجعها وأشكالها، وعروض بستايل يُبقي القاعة منتبهة.</p>
+    <div class="res2">
+      <a class="card doc" href="AI%20in%20Engineering%20-%20Research%20Paper.pdf" target="_blank">
+        <div class="top"><span>بحث علمي</span><span class="mono">PDF · 20 PAGES</span></div>
+        <div class="body"><h3 dir="ltr" style="text-align:left">AI in Engineering — Research Paper</h3><p>بحث بالإنكليزية مع ملخص عربي، متوفر أيضًا بصيغة Word.</p></div>
+        <div class="go">&gt; OPEN_FILE</div>
+      </a>
+      <a class="card doc" href="الذكاء%20الاصطناعي%20في%20الهندسة.pdf" target="_blank">
+        <div class="top"><span>عرض تقديمي</span><span class="mono">SLIDES · ARABIC</span></div>
+        <div class="body"><h3>الذكاء الاصطناعي في الهندسة</h3><p>عرض عربي بخط ثمانية، ومعه نسخة إنكليزية بستايل Blueprint.</p></div>
+        <div class="go">&gt; OPEN_FILE</div>
+      </a>
+      <a class="card doc" href="Tooth%20Decay%20and%20Gum%20Disease%20Around%20the%20World.pdf" target="_blank" style="grid-column:1/-1">
+        <div class="top"><span>عرض + تقرير</span><span class="mono">SLIDES · ILLUSTRATED</span></div>
+        <div class="body"><h3 dir="ltr" style="text-align:left">Tooth Decay and Gum Disease Around the World</h3><p>عرض بستايل مرسوم عن انتشار تسوّس الأسنان وأمراض اللثة، مع تقرير مكتوب بنسخة Word.</p></div>
+        <div class="go">&gt; OPEN_FILE</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="label">// 05 — كيف نعمل</div>
+    <h2>خمس خطوات. لا أكثر.</h2>
+    <ol class="aph">
+      <li><span class="n">01</span><span>ترسل المادة كما هي.<small>صورة من الدفتر، ملف Word، أو حتى فكرة في رسالة.</small></span></li>
+      <li><span class="n">02</span><span>نتّفق على الشكل: رسمي، ملوّن، تفاعلي، أو ستايل خاص.</span></li>
+      <li><span class="n">03</span><span>تصلك نسخة أولى للمراجعة. ملاحظاتك تُطبَّق.</span></li>
+      <li><span class="n">04</span><span>تستلم الملف النهائي: رابط حيّ، PDF للطباعة، أو PowerPoint.</span></li>
+      <li><span class="n">05</span><span>الدقة العلمية مسؤوليتنا المشتركة. أنت المرجع في المادة، ونحن في التصميم.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="order">
+  <div class="wrap book">
+    <div class="pitch">
+      <div class="label">// 06 — اطلب</div>
+      <h2>مادتك.<br>بشكل يستحقها.</h2>
+      <p>إذا كان طلابك يملّون من الورقة، فالمشكلة ليست في المادة.</p>
+      <ul>
+        <li>مدرّسون يريدون امتحانًا أو درسًا مختلفًا.</li>
+        <li>مدارس تريد هوية موحّدة لأوراقها.</li>
+        <li>طلبة جامعة يحتاجون بحثًا أو عرضًا منسّقًا.</li>
+      </ul>
+      <p class="note">الطلب يُرسَل عبر واتساب. السعر والمدة نتّفق عليهما قبل البدء.</p>
+    </div>
+
+    <form class="panel form" id="orderForm" novalidate>
+      <h3>ماذا تحتاج؟</h3>
+      <span class="f-label">الخدمة</span>
+      <div class="chips" id="services-pick" role="group" aria-label="اختر الخدمة">
+        <button type="button" class="chip" aria-pressed="false">درس تفاعلي</button>
+        <button type="button" class="chip" aria-pressed="false">امتحان مصمّم</button>
+        <button type="button" class="chip" aria-pressed="false">عرض تقديمي</button>
+        <button type="button" class="chip" aria-pressed="false">بحث أو تقرير</button>
+      </div>
+      <label class="f-label" for="name">الاسم</label>
+      <input id="name" name="name" autocomplete="name" required>
+      <label class="f-label" for="subject">المادة والمرحلة</label>
+      <input id="subject" name="subject" placeholder="مثلًا: أحياء — الثاني المتوسط">
+      <label class="f-label" for="details">التفاصيل</label>
+      <textarea id="details" name="details" placeholder="عدد الأسئلة، الستايل المفضّل، الموعد المطلوب…"></textarea>
+
+      <button type="submit" class="btn">أرسل الطلب عبر واتساب</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>المادة لك. الشكل علينا. والطالب هو الرابح.</span>
+    <span class="mono">© 2026 · EDU_SERVICES</span>
+  </div>
+</footer>
+
+<script>
+/* ===== CONFIG — رقم واتساب الدولي بدون + أو مسافات ===== */
+const WHATSAPP_NUMBER = "9647830134104";
+
+const status = document.getElementById("status");
+const chips = [...document.querySelectorAll("#services-pick .chip")];
+chips.forEach(c => c.addEventListener("click", () => {
+  c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  status.textContent = "";
+}));
+
+document.getElementById("orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const picked = chips.filter(c => c.getAttribute("aria-pressed") === "true").map(c => c.textContent);
+  const name = document.getElementById("name").value.trim();
+  if (!picked.length){ status.textContent = "> اختر خدمة واحدة على الأقل"; return; }
+  if (!name){ status.textContent = "> اكتب اسمك"; document.getElementById("name").focus(); return; }
+  const subject = document.getElementById("subject").value.trim();
+  const details = document.getElementById("details").value.trim();
+  const msg = `مرحبًا، أريد طلب خدمة تعليمية.
+الاسم: ${name}
+الخدمة: ${picked.join("، ")}${subject ? "\nالمادة والمرحلة: " + subject : ""}${details ? "\nالتفاصيل: " + details : ""}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  status.textContent = "> تم تجهيز الرسالة. أرسلها من واتساب.";
+});
+
+/* ===== white interactive cursor ===== */
+(() => {
+  if (!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  const root = document.documentElement;
+  const dot = document.createElement("div"); dot.className = "cur";
+  const ring = document.createElement("div"); ring.className = "cur-ring";
+  document.body.append(ring, dot);
+  root.classList.add("has-cur");
+  let mx = -100, my = -100, rx = mx, ry = my;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  addEventListener("mousemove", e => {
+    mx = e.clientX; my = e.clientY;
+    root.classList.add("cur-on");
+    const t = e.target;
+    root.classList.toggle("cur-text", !!t.closest("input,textarea"));
+    root.classList.toggle("cur-hover", !!t.closest("a,button:not(:disabled),.card,.cell,.panel svg"));
+  });
+  document.addEventListener("mouseleave", () => root.classList.remove("cur-on"));
+  addEventListener("mousedown", e => {
+    root.classList.add("cur-down");
+    if (reduce) return;
+    const b = document.createElement("div"); b.className = "cur-burst";
+    b.style.left = e.clientX + "px"; b.style.top = e.clientY + "px";
+    document.body.appendChild(b); setTimeout(() => b.remove(), 520);
+  });
+  addEventListener("mouseup", () => root.classList.remove("cur-down"));
+  (function loop(){
+    rx += (mx - rx) * (reduce ? 1 : 0.18); ry += (my - ry) * (reduce ? 1 : 0.18);
+    dot.style.transform = `translate(${mx}px,${my}px)` + (root.classList.contains("cur-hover") ? " scale(.6)" : "");
+    ring.style.transform = `translate(${rx}px,${ry}px)`;
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
