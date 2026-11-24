@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#f3e6c8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#221d17" media="(prefers-color-scheme: dark)">
 <title>خدمات للقطاع التعليمي</title>
-<meta name="description" content="دروس تفاعلية، امتحانات مصمّمة، عروض تقديمية، وبحوث وتقارير — خدمات للمدرّسين والمدارس والجامعات.">
+<meta name="description" content="دروس تفاعلية، امتحانات مصمّمة، عروض تقديمية، وبحوث وتقارير — خدمات للمدرّسين والجامعات والطلبة والمعاهد وأصحاب المكتبات.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -71,6 +71,9 @@ h1,h2,h3{font-family:"Thmanyah Serif Display",serif;font-weight:900;line-height:
 .hero h1{font-size:clamp(42px,6.6vw,76px);margin:16px 0 8px}
 .hero h1 em{font-style:normal;color:var(--rust)}
 .hero p.lead{font-size:21px;color:var(--ink-soft);margin:0 0 24px;max-width:32ch}
+.hero p.for{margin:-10px 0 22px;font-weight:700;font-size:16px;color:var(--teal-deep);border-right:4px solid var(--rust);padding-right:10px}
+:root[data-theme="dark"] .hero p.for{color:var(--teal)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero p.for{color:var(--teal)}}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
 .panel{border:3px solid var(--ink);background:var(--paper-2);box-shadow:var(--shadow)}
 .hero svg{width:100%;height:auto;display:block}
@@ -94,6 +97,17 @@ a.cell:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
 .cell p{margin:0;font-size:16.5px}
 .cell .ico{width:54px;height:54px;display:block;margin-bottom:6px}
 
+/* audience */
+.who{display:grid;grid-template-columns:repeat(6,1fr);gap:26px 16px;margin-top:22px}
+.who-card{grid-column:span 2;border:3px solid var(--ink);background:var(--paper);padding:20px 18px 16px;position:relative;box-shadow:4px 4px 0 var(--ink)}
+.who-card:nth-child(4){grid-column:2 / span 2}
+.who-card .tag{position:absolute;top:-14px;right:14px;background:var(--rust);color:#fff8ea;border:2px solid var(--ink);font-size:18px;padding:0 8px}
+.who-card .ico{width:58px;height:58px;display:block;padding:2px;margin-bottom:6px}
+.who-card h3{font-family:"Thmanyah Serif Text",serif;font-size:23px;margin:4px 0 4px}
+.who-card p{margin:0 0 10px;font-size:16.5px;color:var(--ink-soft)}
+.who-card ul{list-style:none;margin:0;padding:10px 0 0;border-top:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);font-size:15.5px;font-weight:700}
+.who-card li{padding-right:18px;position:relative;line-height:1.8}
+.who-card li::before{content:"›";position:absolute;right:0;color:var(--rust);font-family:"VT323",monospace;font-size:22px;line-height:1.3}
 /* aphorisms / process */
 .aph{list-style:none;padding:0;margin:0;display:grid;gap:0;border-top:3px solid var(--ink)}
 .aph li{
@@ -199,6 +213,9 @@ footer .mono{font-size:20px}
 @media (max-width:900px){
   .strip{grid-template-columns:repeat(2,1fr);row-gap:26px}
   .res{grid-template-columns:repeat(2,1fr)}
+  .who{grid-template-columns:repeat(2,1fr)}
+  .who-card,.who-card:nth-child(4){grid-column:auto}
+  .who-card:nth-child(5){grid-column:1 / -1}
   .bar nav{display:none}
 }
 @media (max-width:760px){
@@ -212,7 +229,7 @@ footer .mono{font-size:20px}
   .lesson-grid{padding:16px;justify-items:stretch}
   .crt{width:min(340px,100%);justify-self:center}
   .lesson h3{font-size:28px}
-  .strip,.res,.res2{grid-template-columns:1fr}
+  .strip,.res,.res2,.who{grid-template-columns:1fr}
   .aph li{grid-template-columns:44px 1fr}
   .form{padding:16px}
   .form .btn,.lesson-actions .btn{width:100%;text-align:center}
@@ -229,6 +246,7 @@ footer .mono{font-size:20px}
     <span class="mono">&gt; EDU_SERVICES.EXE</span>
     <nav aria-label="أقسام الصفحة">
       <a href="#services">الخدمات</a>
+      <a href="#who">لمن</a>
       <a href="#lessons">الدروس</a>
       <a href="#exams">الامتحانات</a>
       <a href="#docs">العروض والبحوث</a>
@@ -243,6 +261,7 @@ footer .mono{font-size:20px}
       <span class="kicker">خدمات للقطاع التعليمي</span>
       <h1>الدرس الذي يُجرَّب<br><em>لا يُنسى.</em></h1>
       <p class="lead">دروس تفاعلية، امتحانات بتصميم يليق بطلابك، وعروض وبحوث جاهزة للطباعة — من فكرتك إلى الصف.</p>
+      <p class="for">للمدرّسين · الجامعات · الطلبة · المعاهد · أصحاب المكتبات</p>
       <div class="hero-actions">
         <a class="btn alt" href="#lessons">جرّب درسًا ↓</a>
         <a class="btn ghost" href="#order">اطلب خدمتك</a>
@@ -363,9 +382,54 @@ footer .mono{font-size:20px}
   </div>
 </section>
 
+<section class="section" id="who" style="padding-top:0">
+  <div class="wrap">
+    <div class="label">// 02 — لمن</div>
+    <h2>لكل من يقف بين المعلومة والطالب.</h2>
+    <p class="sub">خمس جهات نعمل معها. لكلٍّ منها حاجة مختلفة — وخدمة تناسبها.</p>
+    <div class="who">
+      <div class="who-card">
+        <span class="tag mono">01</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="4" y="6" width="34" height="24" fill="var(--teal-deep)" stroke="var(--ink)" stroke-width="3"/><path d="M10 22 l6 -6 l5 4 l7 -8" fill="none" stroke="#f6edd2" stroke-width="2"/><circle cx="42" cy="34" r="6" fill="var(--mustard)" stroke="var(--ink)" stroke-width="3"/><path d="M31 52 q11 -20 22 0 z" fill="var(--rust)" stroke="var(--ink)" stroke-width="3"/></svg>
+        <h3>المدرّسون</h3>
+        <p>أسئلتك من الدفتر تتحوّل إلى امتحان أنيق أو درس تفاعلي يشدّ الصف.</p>
+        <ul><li>امتحانات شهرية ونصف السنة</li><li>دروس تفاعلية لموضوع صعب</li><li>أوراق عمل ومراجعات</li></ul>
+      </div>
+      <div class="who-card">
+        <span class="tag mono">02</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><path d="M4 20 l23 -12 l23 12 z" fill="var(--rust)" stroke="var(--ink)" stroke-width="3"/><g fill="var(--paper)" stroke="var(--ink)" stroke-width="3"><rect x="9" y="22" width="6" height="20"/><rect x="24" y="22" width="6" height="20"/><rect x="39" y="22" width="6" height="20"/></g><rect x="4" y="42" width="46" height="6" fill="var(--wood)" stroke="var(--ink)" stroke-width="3"/></svg>
+        <h3>الجامعات</h3>
+        <p>محاضرات تفاعلية بالعربي والإنكليزي، وعروض تليق بالقاعة والمؤتمر.</p>
+        <ul><li>وحدات تعليمية من بحوث حديثة</li><li>عروض للمحاضرات والمؤتمرات</li><li>مواد ثنائية اللغة</li></ul>
+      </div>
+      <div class="who-card">
+        <span class="tag mono">03</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><path d="M4 20 l23 -10 l23 10 l-23 10 z" fill="var(--ink)"/><path d="M14 25 v10 q13 8 26 0 v-10" fill="var(--teal)" stroke="var(--ink)" stroke-width="3"/><line x1="46" y1="21" x2="46" y2="36" stroke="var(--ink)" stroke-width="3"/><circle cx="46" cy="39" r="3" fill="var(--mustard)" stroke="var(--ink)" stroke-width="2"/></svg>
+        <h3>الطلبة</h3>
+        <p>بحث تخرّج أو تقرير أو عرض مادة — منسّق بالمراجع والأشكال وجاهز للتسليم.</p>
+        <ul><li>بحوث وتقارير Word وPDF</li><li>عروض تقديمية للمناقشة</li><li>ملخّصات مراجعة تفاعلية</li></ul>
+      </div>
+      <div class="who-card">
+        <span class="tag mono">04</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="6" y="16" width="42" height="32" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><path d="M2 18 l25 -12 l25 12" fill="none" stroke="var(--ink)" stroke-width="3"/><rect x="12" y="24" width="12" height="10" fill="var(--screen)" stroke="var(--ink)" stroke-width="2"/><rect x="30" y="24" width="12" height="10" fill="var(--screen)" stroke="var(--ink)" stroke-width="2"/><rect x="22" y="36" width="10" height="12" fill="var(--rust)" stroke="var(--ink)" stroke-width="2"/></svg>
+        <h3>المعاهد ومراكز التدريس</h3>
+        <p>هوية موحّدة لكل أوراقكم، ومواد تجعل طلابكم يختارونكم من جديد.</p>
+        <ul><li>امتحانات بشعار المعهد</li><li>ملازم ودروس بستايل واحد</li><li>تجهيز مواد الدورات</li></ul>
+      </div>
+      <div class="who-card">
+        <span class="tag mono">05</span>
+        <svg class="ico" viewBox="0 0 54 54" aria-hidden="true"><rect x="4" y="44" width="46" height="6" fill="var(--wood)" stroke="var(--ink)" stroke-width="3"/><g stroke="var(--ink)" stroke-width="3"><rect x="8" y="14" width="8" height="30" fill="var(--rust)"/><rect x="16" y="20" width="8" height="24" fill="var(--mustard)"/><rect x="24" y="10" width="8" height="34" fill="var(--teal)"/></g><rect x="34" y="24" width="16" height="12" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><rect x="37" y="18" width="10" height="6" fill="#f6edd2" stroke="var(--ink)" stroke-width="2"/></svg>
+        <h3>أصحاب المكتبات</h3>
+        <p>نماذج امتحانات وملازم جاهزة للطباعة والبيع، بتصميم يميّز رفوفكم.</p>
+        <ul><li>نماذج أسئلة لكل المراحل</li><li>ملفات PDF جاهزة للطباعة</li><li>تصاميم حصرية لمكتبتك</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="lessons">
   <div class="wrap">
-    <div class="label">// 02 — الدروس التفاعلية</div>
+    <div class="label">// 03 — الدروس التفاعلية</div>
     <h2>لا تقرأ عنها. جرّبها.</h2>
     <p class="sub">درسان حيّان على الإنترنت. افتح أيًّا منهما واضغط، اسحب، وأجب — هكذا يتعلّم طلابك.</p>
 
@@ -465,7 +529,7 @@ footer .mono{font-size:20px}
 
 <section class="section" id="exams">
   <div class="wrap">
-    <div class="label">// 03 — الامتحانات</div>
+    <div class="label">// 04 — الامتحانات</div>
     <h2>نفس الأسئلة. عشرة أشكال.</h2>
     <p class="sub">تصلنا الأسئلة صورةً من الدفتر، وتخرج ورقة امتحان بستايل يناسب المرحلة. افتح أي نموذج.</p>
     <div class="res">
@@ -525,7 +589,7 @@ footer .mono{font-size:20px}
 
 <section class="section" id="docs">
   <div class="wrap">
-    <div class="label">// 04 — العروض والبحوث</div>
+    <div class="label">// 05 — العروض والبحوث</div>
     <h2>للجامعة أيضًا.</h2>
     <p class="sub">بحوث بمراجعها وأشكالها، وعروض بستايل يُبقي القاعة منتبهة.</p>
     <div class="res2">
@@ -550,7 +614,7 @@ footer .mono{font-size:20px}
 
 <section class="section" id="how">
   <div class="wrap">
-    <div class="label">// 05 — كيف نعمل</div>
+    <div class="label">// 06 — كيف نعمل</div>
     <h2>خمس خطوات. لا أكثر.</h2>
     <ol class="aph">
       <li><span class="n">01</span><span>ترسل المادة كما هي.<small>صورة من الدفتر، ملف Word، أو حتى فكرة في رسالة.</small></span></li>
@@ -565,19 +629,29 @@ footer .mono{font-size:20px}
 <section class="section" id="order">
   <div class="wrap book">
     <div class="pitch">
-      <div class="label">// 06 — اطلب</div>
+      <div class="label">// 07 — اطلب</div>
       <h2>مادتك.<br>بشكل يستحقها.</h2>
       <p>إذا كان طلابك يملّون من الورقة، فالمشكلة ليست في المادة.</p>
       <ul>
         <li>مدرّسون يريدون امتحانًا أو درسًا مختلفًا.</li>
-        <li>مدارس تريد هوية موحّدة لأوراقها.</li>
-        <li>طلبة جامعة يحتاجون بحثًا أو عرضًا منسّقًا.</li>
+        <li>جامعات تريد محاضرات وعروضًا بمستوى القاعة.</li>
+        <li>طلبة يحتاجون بحثًا أو عرضًا منسّقًا.</li>
+        <li>معاهد تريد هوية موحّدة لأوراقها.</li>
+        <li>مكتبات تريد نماذج جاهزة للطباعة والبيع.</li>
       </ul>
       <p class="note">الطلب يُرسَل عبر واتساب. السعر والمدة نتّفق عليهما قبل البدء.</p>
     </div>
 
     <form class="panel form" id="orderForm" novalidate>
       <h3>ماذا تحتاج؟</h3>
+      <span class="f-label">أنا</span>
+      <div class="chips" id="who-pick" role="group" aria-label="من أنت">
+        <button type="button" class="chip" aria-pressed="false">مدرّس</button>
+        <button type="button" class="chip" aria-pressed="false">جامعة</button>
+        <button type="button" class="chip" aria-pressed="false">طالب</button>
+        <button type="button" class="chip" aria-pressed="false">معهد / مركز</button>
+        <button type="button" class="chip" aria-pressed="false">صاحب مكتبة</button>
+      </div>
       <span class="f-label">الخدمة</span>
       <div class="chips" id="services-pick" role="group" aria-label="اختر الخدمة">
         <button type="button" class="chip" aria-pressed="false">درس تفاعلي</button>
@@ -615,6 +689,12 @@ chips.forEach(c => c.addEventListener("click", () => {
   c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true");
   status.textContent = "";
 }));
+/* "أنا": single choice */
+const whoChips = [...document.querySelectorAll("#who-pick .chip")];
+whoChips.forEach(c => c.addEventListener("click", () => {
+  whoChips.forEach(o => o.setAttribute("aria-pressed", o === c ? "true" : "false"));
+  status.textContent = "";
+}));
 
 document.getElementById("orderForm").addEventListener("submit", e => {
   e.preventDefault();
@@ -622,10 +702,11 @@ document.getElementById("orderForm").addEventListener("submit", e => {
   const name = document.getElementById("name").value.trim();
   if (!picked.length){ status.textContent = "> اختر خدمة واحدة على الأقل"; return; }
   if (!name){ status.textContent = "> اكتب اسمك"; document.getElementById("name").focus(); return; }
+  const who = (whoChips.find(c => c.getAttribute("aria-pressed") === "true") || {}).textContent || "";
   const subject = document.getElementById("subject").value.trim();
   const details = document.getElementById("details").value.trim();
   const msg = `مرحبًا، أريد طلب خدمة تعليمية.
-الاسم: ${name}
+الاسم: ${name}${who ? "\nالجهة: " + who : ""}
 الخدمة: ${picked.join("، ")}${subject ? "\nالمادة والمرحلة: " + subject : ""}${details ? "\nالتفاصيل: " + details : ""}`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
   status.textContent = "> تم تجهيز الرسالة. أرسلها من واتساب.";
